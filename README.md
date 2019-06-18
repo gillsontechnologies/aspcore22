@@ -1,6 +1,8 @@
-# aspcore22
+# ASP.NET Core 2.2 Starter Kit
+
 ASP.NET Core 2.2 Starter Kit
-This is a ready made ASP.NET Core 2.2 MVC
+I built this project in ASP.NET Core 2.2 with database first approach and Identity 2.0
+I implemented many basic functionalities that we need to implement in every project again and again before start the project. With the help of this project, you just need to clone and rename the solution and start on actual funtionality. So, definatily it will save your time.
 
 # Work Done
 I implement the following functionalities in initial commit:
@@ -15,16 +17,6 @@ I implement the following functionalities in initial commit:
 8. Sending email to user for email verification, reset password and account approved by admin.
 9. User management - admin can update any user's profile info, login password, user permissions and can delete account.
 10. More minor features
-
-I implemented Basic UI so you can start 
-
-
-
-# ASP.NET Core 2.2 Starter Kit
-
-ASP.NET Core 2.2 Starter Kit
-I built this project in ASP.NET Core 2.2 with database first approach and Identity 2.0
-I implemented many basic functionalities that we need to implement in every project again and again before start the project. With the help of this project, you just need to clone and rename the solution and start on actual funtionality. So, definatily it will save your time.
 
 ## Getting Started
 
