@@ -1,0 +1,10 @@
+{
+  "Id": 0,
+  "AdminEmailId": "admin@yopmail.com",
+  "GoogleClientId": "google-public-key",
+  "GoogleClientSecret": "google-private-key",
+  "MicrosoftClientId": "microsoft-public-key",
+  "MicrosoftClientSecret": "microsoft-private-key",
+  "SendGridUser": null,
+  "SendGridKey": null
+}

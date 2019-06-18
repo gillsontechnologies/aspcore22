@@ -1,0 +1,42 @@
+﻿@model AspNetCore22Mvc.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>User Management</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Confirm Delete Permanently</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="text-center">
+                            <h3>Do you really want to delete this account permanentaly?</h3>
+                            <h5>We will delete this account and related information to this account Permanently. Confirm to delete.</h5>
+                            <img src="~/Theme/images/remove-user-xxl.png" width="100" />
+                            <h3 style="margin:30px 0">@Model.Email</h3>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="Id" />
+                                <input type="submit" value="Confirm Delete" class="btn btn-danger" />
+                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Go Back</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,163 @@
+﻿@model AspNetCore22Mvc.Models.CustomModels.Admin_Settings
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="formAdminSettings" asp-action="SaveSettings" method="post">
+
+            <h4>Application Settings</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+            <h4>
+                Notifications
+            </h4>
+            <div class="form-group">
+                <label asp-for="AdminEmailId">
+                    Admin Email Address
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="AdminEmailId" class="form-control" autocomplete="on" />
+                <span asp-validation-for="AdminEmailId" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <h4>
+                External Login
+            </h4>
+            <div class="form-group">
+                <label asp-for="GoogleClientId">
+                    Google Client Id
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="GoogleClientId" class="form-control" autocomplete="on" />
+                <span asp-validation-for="GoogleClientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoogleClientSecret">
+                    Google Client Secret
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="GoogleClientSecret" class="form-control" autocomplete="on" />
+                <span asp-validation-for="GoogleClientSecret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MicrosoftClientId">
+                    Microsoft Client Id
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="MicrosoftClientId" class="form-control" autocomplete="on" />
+                <span asp-validation-for="MicrosoftClientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MicrosoftClientSecret">
+                    Microsoft Client Secret
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="MicrosoftClientSecret" class="form-control" autocomplete="on" />
+                <span asp-validation-for="MicrosoftClientSecret" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <h4>
+                Mail Server Settings
+            </h4>
+            <div class="form-group">
+                <label asp-for="SendGridKey">
+                    Send Grid Key
+                    <span class="required">*</span>
+                </label>
+                <input asp-for="SendGridKey" class="form-control" autocomplete="on" />
+                <span asp-validation-for="SendGridKey" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <input id="btnSaveSettings" type="button" value="Save Settings" class="btn btn-success" />
+
+        </form>
+    </div>
+</div>
+
+
+<div id="divWarning" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Application Settings</h4>
+            </div>
+            <div class="modal-body" style="min-height:50px;">
+                <div class="form-group">
+                    <code>Warning:</code> You will need to restart the application if you are changing the External Login settings!
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="btnSave" class="btn btn-success">OK</button>
+                <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="howto" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-book" aria-hidden="true"></i> Help</h4>
+            </div>
+            <div class="modal-body" style="min-height:50px;">
+                <div class="form-group">
+                    <h2>Create a Google API Console project and client ID</h2>
+                    <hr />
+                    <ul>
+                        <li>Navigate to <a style="color:blue" href="https://developers.google.com/identity/sign-in/web/devconsole-project" target="_blank" rel="nofollow" data-linktype="external">Integrating Google Sign-In into your web app <i class="fa fa-external-link"></i></a> and select <strong>CONFIGURE A PROJECT</strong>.</li>
+                        <li>In the <strong>Configure your OAuth client</strong> dialog, select <strong>Web server</strong>.</li>
+                        <li>In the <strong>Authorized redirect URIs</strong> text entry box, set the redirect URI. For example, <code>https://localhost:5001/signin-google</code></li>
+                        <li>Save the <strong>Client ID</strong> and <strong>Client Secret</strong> for future use.</li>
+                        <li>Copy <strong>Client ID</strong> and <strong>Client Secret</strong> than paste here.</li>
+                    </ul><br /><br />
+                    <h2>Create the app in Microsoft Developer Portal</h2>
+                    <hr />
+                    <ul>
+                        <li>Navigate to <a style="color:blue" href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/microsoft-logins?view=aspnetcore-2.2#create-the-app-in-microsoft-developer-portal" target="_blank" rel="nofollow" data-linktype="external">Microsoft Account external login setup <i class="fa fa-external-link"></i></a> and follow the instructions.</li>
+                        <li>Copy <strong>Client ID</strong> and <strong>Client Secret</strong> than paste here.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#btnSaveSettings').on('click', function () {
+        $("#divWarning").modal({
+            backdrop: 'static',
+            focus: true,
+            keyboard: true
+        });
+    });
+
+    $('#btnSave').on('click', function () {
+        $('#DivSearchJobRef').modal('hide');
+        $("#formAdminSettings").submit();
+    });
+
+    $('#help').on('click', function () {
+        $("#howto").modal({
+            backdrop: 'static',
+            focus: true,
+            keyboard: true
+        });
+    });
+</script>

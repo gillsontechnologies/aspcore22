@@ -1,0 +1,153 @@
+﻿@model AspNetCore22Mvc.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h2>User Management</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>
+            User Profile
+            <small>Basic information</small>
+        </h2>
+        <form id="FormProfile" asp-action="Edit" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" autocomplete="on" readonly/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname"></label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Organisation"></label>
+                <input asp-for="Organisation" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Position"></label>
+                <input asp-for="Position" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>isLockout</label>
+                <div>
+                    @{
+                        if (Model.LockoutEnd > DateTime.UtcNow)
+                        {
+                            <span class='label label-danger'>Locked</span>
+                            <label>&nbsp;&nbsp;&nbsp;&nbsp;Click here to unlock</label>
+                            <input id="lockStatus" name="lockStatus" type="checkbox" class="js-switch" />
+                        }
+                        else
+                        {
+                            <span class='label label-success'>Unlocked</span>
+                        }
+                    }
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div>
+                    <button type="submit" style="margin-bottom:5px;" class="btn btn-success">Save Changes</button>
+                    <i id="FPloader" style="display:none;font-size: 20px;" class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                    <label id="FormProfileMsg" class="green"></label>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+        <h2>
+            Delete Account
+            <small>Permanent delete user account</small>
+        </h2>
+        <form method="post">
+            <p>Delete this account and related information Permanently</p>
+            <div class="form-group">
+                <div>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Account</a>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+        <h2>
+            User Permissions
+            <small>Change user permissions</small>
+        </h2>
+        <form id="ApproveForm" asp-action="ApproveForm" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label>Assign Role* </label>
+                <select id="RoleId" name="RoleId" asp-items="ViewBag.Roles" class="form-control">
+                    <option value="--Select--">--Select--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="isApproved"></label>
+                <input asp-for="isApproved" type="checkbox" />
+                <span asp-validation-for="isApproved" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div>
+                    <button type="submit" style="margin-bottom:5px;" class="btn btn-warning">Save Changes</button>
+                    <i id="AFloader" style="display:none;font-size: 20px;" class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                    <label id="ApproveFormMsg" class="green"></label>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+
+        <h2>
+            Security
+            <small>Change user password</small>
+        </h2>
+        <form id="CPForm" asp-action="ChangePassword" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label>New Password* </label>
+                <input name="Password" id="Password" type="password" autocomplete="off" class="form-control">
+            </div>
+
+
+            <div class="form-group">
+                <label>Confirm Password*</label>
+                <input name="ConfirmPassword" id="ConfirmPassword" autocomplete="off" type="password" class="form-control">
+                <span id="passError"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                    <button type="submit" style="margin-bottom:5px;" class="btn btn-primary">Save Changes</button>
+                    <i id="CPloader" style="display:none;font-size: 20px;" class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                    <label id="CPFormMsg" class="green"></label>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+
